@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,11 +29,11 @@ public class UserController {
         return customerService.registerUser(customer);
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<String> loginvalidate(@RequestBody customer customer){
-        return customerService.loginValidate(customer);
-
-    }
+//    @PostMapping("/login")
+//    public ResponseEntity<String> loginvalidate(@RequestBody customer customer){
+//        return customerService.loginValidate(customer);
+//
+//    }
     @RequestMapping("/user")
     public customer getUserDetailsAfterLogin(Authentication authentication) {
         List<customer> customers = customerRepository.findByEmail(authentication.getName());
@@ -43,4 +44,24 @@ public class UserController {
         }
 
     }
+
+
+    @RestController
+    public class LogoutController {
+
+        @PostMapping("/logout")
+        public ResponseEntity<String> logout() {
+            try {
+                // Invalidate the current user's authentication session
+                Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+                if (authentication != null) {
+                    SecurityContextHolder.getContext().setAuthentication(null);
+                }
+                return ResponseEntity.ok().body("Logout successful");
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred during logout");
+            }
+        }
+    }
+
 }

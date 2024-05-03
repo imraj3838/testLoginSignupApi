@@ -42,20 +42,20 @@ public class CustomerserviceImpl implements CustomerService{
         return response;
     }
 
-    @Override
-    public ResponseEntity<String> loginValidate(customer customer) {
-        String email1 = customer.getEmail();
-        String pass = customer.getPassword();
-        ResponseEntity response = null;
-        List<customer> c =  customerRepository.findByEmail(email1);
-        if(c.size()>0){
-          boolean b = passwordEncoder.matches(pass,c.get(0).getPassword());
-          if(b){
-              response = ResponseEntity
-                      .status(HttpStatus.CREATED)
-                      .body("Given user details are successfully registered");
-          }
-        }
-        return response;
-    }
+//    @Override
+//    public ResponseEntity<String> loginValidate(customer customer) {
+//        String email1 = customer.getEmail();
+//        String pass = customer.getPassword();
+//        ResponseEntity response = null;
+//        List<customer> c =  customerRepository.findByEmail(email1);
+//        if(c.size()>0){
+//          boolean b = passwordEncoder.matches(pass,c.get(0).getPassword());
+//          if(b){
+//              response = ResponseEntity
+//                      .status(HttpStatus.CREATED)
+//                      .body("Given user details are successfully registered");
+//          }
+//        }
+//        return response;
+//    }
 }

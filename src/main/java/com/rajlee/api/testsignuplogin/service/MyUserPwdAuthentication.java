@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+// this is our own custom authentication file
+
 @Component
 public class MyUserPwdAuthentication implements AuthenticationProvider {
 

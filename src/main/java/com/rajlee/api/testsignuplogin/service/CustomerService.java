@@ -8,5 +8,5 @@ import org.springframework.stereotype.Service;
 public interface CustomerService {
     public ResponseEntity<String> registerUser(customer customer);
 
-    public ResponseEntity<String> loginValidate(customer customer);
+//    public ResponseEntity<String> loginValidate(customer customer);
 }
